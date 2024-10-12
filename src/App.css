@@ -1,0 +1,27 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+td {
+  width: 30%;
+}
+.td {
+  text-align: left;
+  width: 25vw;
+}
+.tagline {
+  width: 15%;
+  margin-right: 2%;
+
+}
+
+input {
+  height: 4vw;
+}
+button {
+  align-items: center;
+  width: 4vw;
+  height: 8vw;
+}
