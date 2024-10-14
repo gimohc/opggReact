@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Match } from "./Match";
+import { Matches } from "./Match";
 import { RegionInput } from "./RegionInput";
 import "./App.css";
 
@@ -35,14 +35,11 @@ function App() {
       <br />
       <br />
       <table>
-        <Match
-          matchOutput="victory"
-          img="e"
-          championName="e"
-          score="1/2/3"
-        ></Match>
+        <Matches
+          onFetch={() => setCurrentOperation(operations.ENTERING)}
+        />
       </table>
-      { /* for debugging purposes <div>{name.current?.value} {tagline.current?.value} {region.current?.value} </div> */ }
+      {/* for debugging purposes <div>{name.current?.value} {tagline.current?.value} {region.current?.value} </div> */}
     </>
   );
 }
