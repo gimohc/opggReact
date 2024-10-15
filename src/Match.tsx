@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
 
-interface MatchInfo {
+export interface MatchInfo {
   win: boolean;
   playerName: string;
   championName: string;
   level: number;
   score: string;
   items: number[];
+}
+export interface InputData {
+  playerRegion?: string;
+  playerName?: string;
+  playerTag?: string;
 }
 export function Match(matchInfo: MatchInfo) {
   return (
@@ -22,26 +25,9 @@ export function Match(matchInfo: MatchInfo) {
   );
 }
 
-export function Matches({ onFetch }: { onFetch: () => void }) {
-  const [matches, setMatches] = useState<MatchInfo[]>([]);
-  
-  const fetchMatches = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/api/matches");
-      setMatches(response.data);
-      onFetch();
-    } catch (error) {
-      onFetch();
-      console.error("Error fetching matches:", error);
-    }
-  };
-  
-  useEffect(() => {
-    fetchMatches();
-    
-  }, []);
-  return matches.map((match: MatchInfo) => {
-    console.log(match);
-    return <Match {...match} />;
-  });
+export function Matches({ matches }: { matches: MatchInfo[] | null}) {
+  if (matches != null)
+    return matches.map((match: MatchInfo) => {
+      return <Match {...match} />;
+    });
 }

@@ -1,45 +1,46 @@
-import { useState, useRef } from "react";
-import { Matches } from "./Match";
+import { useState } from "react";
+import { Matches, InputData, MatchInfo } from "./Match";
 import { RegionInput } from "./RegionInput";
+import { InputContext } from "./InputContext";
 import "./App.css";
+import { FetchButton } from "./FetchButton";
 
-const operations = {
-  ENTERING: "entering",
-  PROCESSING: "processing",
-  INVALID: "invalid",
-  VALID: "valid",
-} as const;
 function App() {
-  const name = useRef<HTMLInputElement>(null);
-  const tagline = useRef<HTMLInputElement>(null);
-  const region = useRef<HTMLSelectElement>(null);
+  const [inputData, setInputData] = useState<InputData>({});
+  const [matches, setMatches] = useState<MatchInfo[] | null>(null);
 
-  const [currentOperation, setCurrentOperation] = useState<string>(
-    operations.ENTERING
-  );
+  console.log(inputData);
 
   return (
     <>
-      <RegionInput ref={region} />
+      <RegionInput
+        onChange={(e) =>
+          setInputData({ ...inputData, playerRegion: e.target.value })
+        }
+      />
       <br />
 
-      <input ref={name} placeholder="In game name" />
-      <input ref={tagline} placeholder="tagline" className="tagline" />
-      <button
-        onClick={() => {
-          setCurrentOperation(operations.PROCESSING);
-        }}
-      >
-        view
-      </button>
+      <input
+        onChange={(e) =>
+          setInputData({ ...inputData, playerName: e.target.value })
+        }
+        placeholder="In game name"
+      />
+      <input
+        onChange={(e) =>
+          setInputData({ ...inputData, playerTag: e.target.value })
+        }
+        placeholder="tagline"
+        className="tagline"
+      />
+      <InputContext.Provider value={inputData}>
+        <FetchButton setMatchesInfo={setMatches} />
+      </InputContext.Provider>
       <br />
       <br />
       <table>
-        <Matches
-          onFetch={() => setCurrentOperation(operations.ENTERING)}
-        />
+        <Matches matches={matches} />
       </table>
-      {/* for debugging purposes <div>{name.current?.value} {tagline.current?.value} {region.current?.value} </div> */}
     </>
   );
 }

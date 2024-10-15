@@ -1,19 +1,15 @@
-import { useState, forwardRef } from "react";
+import React from "react";
 
-export const RegionInput = forwardRef<HTMLSelectElement>(function RegionInput(
-  props,
-  ref
+interface RegionInputProps {
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+}
+export function RegionInput(
+  props: RegionInputProps,
 ) {
-  const [region, setRegion] = useState("europe");
-
   return (
     <>
       <label>Region</label>
-      <select
-        ref={ref}
-        name="region"
-        onChange={(e) => setRegion(e.target.value)}
-      >
+      <select onChange={props.onChange} name="region">
         <option value="americas"> NA </option>
         <option value="americas"> BR </option>
         <option value="americas"> LAN </option>
@@ -34,4 +30,4 @@ export const RegionInput = forwardRef<HTMLSelectElement>(function RegionInput(
       </select>
     </>
   );
-});
+};
