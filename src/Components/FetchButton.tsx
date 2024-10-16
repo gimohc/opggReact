@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext } from "react";
-import { InputContext } from "./InputContext";
+import { InputContext } from ".././Context/InputContext";
 import { InputData, MatchInfo } from "./Match";
 
 interface ChildComponentProps {

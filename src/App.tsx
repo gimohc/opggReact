@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Matches, InputData, MatchInfo } from "./Match";
-import { RegionInput } from "./RegionInput";
-import { InputContext } from "./InputContext";
+import { Matches, InputData, MatchInfo } from "./Components/Match.tsx";
+import { RegionInput } from "./Components/RegionInput";
+import { InputContext } from "./Context/InputContext";
 import "./App.css";
-import { FetchButton } from "./FetchButton";
+import { FetchButton } from "./Components/FetchButton";
 
 function App() {
   const [inputData, setInputData] = useState<InputData>({});
