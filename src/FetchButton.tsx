@@ -15,7 +15,7 @@ export function FetchButton({ setMatchesInfo }: ChildComponentProps) {
     else {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/performAction",
+          "https://opgg-production.up.railway.app/api/performAction",
           {
             actionType: "getMatchHistory",
             inputData: inputData,
