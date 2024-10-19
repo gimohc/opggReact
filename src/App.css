@@ -4,24 +4,83 @@
   padding: 2rem;
   text-align: center;
 }
-td {
-  width: 30%;
-}
 .td {
   text-align: left;
   width: 25vw;
 }
-.tagline {
-  width: 15%;
-  margin-right: 2%;
-
+.Header {
+  position: absolute;
+  top: 10vh;
+  transform: translateX(-50%);
+  width: 100%;
 }
 
+.SearchBar {
+  overflow: hidden;
+  padding-left: 8%;
+  padding-right: 8%;
+  padding: 1rem;
+  height: 6%;
+  width: 60%;
+  align-items: center;
+  justify-content:center;
+  background-color: #bbb;
+  border-radius: 40%;
+  display: flex;                                                                                            
+  
+}
+.Label {
+  text-align: left;
+  font-size: small;
+  margin-bottom: 2%;
+}
+.Select {
+  margin-right: 6vb;
+  text-align: left;
+  width: 100%;
+}
+.InputGroup {
+  margin-right: 5%;
+  margin-bottom: 1%;
+  display: grid;
+  align-items: center;
+}
+.hidden {
+  display: none;
+}
+.FormButton {
+  background: none;
+  color:black;
+  font-size: small;
+  border-radius: 0;
+  height:200%;
+
+}
+select {
+  background: none;
+  border: 0;
+  height: 140%;
+  text-align: center;
+  color:black;
+
+}
 input {
-  height: 4vw;
+  padding-left:4%;
+  margin-left : -5%;
+  background: none;
+  border-top: 0px;
+  border-bottom: 0px;
+  background-color: #bbb;
+  height: 100%;
+  color:black;
 }
 button {
+  text-align: center;
+  justify-content: center;
+  display: flex;
   align-items: center;
-  width: 4vw;
-  height: 8vw;
+  width: 25%;
+}
+td {
+  width: 40%;
 }

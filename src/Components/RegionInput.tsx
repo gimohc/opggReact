@@ -8,9 +8,9 @@ export function RegionInput(
 ) {
   return (
     <>
-      <label>Region</label>
-      <select onChange={props.onChange} name="region">
-        <option value={undefined} selected={true} disabled={true} >SELECT REGION</option>
+      <label className="Label">Region</label>
+      <select className="Select" onChange={props.onChange} name="region">
+        <option value={undefined} selected={true} disabled={true} >SELECT</option>
         <option value="americas"> NA </option>
         <option value="americas"> BR </option>
         <option value="americas"> LAN </option>

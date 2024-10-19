@@ -13,29 +13,29 @@ function App() {
 
   return (
     <>
-      <RegionInput
-        onChange={(e) =>
-          setInputData({ ...inputData, playerRegion: e.target.value })
-        }
-      />
-      <br />
+      <div className="SearchBar Header">
+        <div className="InputGroup">
+          <RegionInput
+            onChange={(e) =>
+              setInputData({ ...inputData, playerRegion: e.target.value })
+            }
+          />
+        </div>
+        <div className="InputGroup">
+          <label className="Label">Name</label>
 
-      <input
-        onChange={(e) =>
-          setInputData({ ...inputData, playerName: e.target.value })
-        }
-        placeholder="In game name"
-      />
-      <input
-        onChange={(e) =>
-          setInputData({ ...inputData, playerTag: e.target.value })
-        }
-        placeholder="tagline"
-        className="tagline"
-      />
-      <InputContext.Provider value={inputData}>
-        <FetchButton setMatchesInfo={setMatches} />
-      </InputContext.Provider>
+          <input
+            onChange={(e) => {
+              const fullName = e.target.value.split("#");
+              setInputData({ ...inputData, playerName: fullName[0], playerTag: fullName[1] });
+            }}
+            placeholder="Name#Tag"
+          />
+        </div>
+        <InputContext.Provider value={inputData}>
+          <FetchButton setMatchesInfo={setMatches} />
+        </InputContext.Provider>
+      </div>
       <br />
       <br />
       <table>

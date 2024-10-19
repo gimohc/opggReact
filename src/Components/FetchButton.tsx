@@ -11,7 +11,7 @@ export function FetchButton({ setMatchesInfo }: ChildComponentProps) {
   const inputData = useContext<InputData | null>(InputContext);
 
   const fetchMatches = async () => {
-    if (inputData?.playerRegion == null) window.alert("Invalid Region");
+    if (inputData?.playerRegion == undefined) window.alert("Invalid Region");
     else {
       try {
         const response = await axios.post(
@@ -30,6 +30,7 @@ export function FetchButton({ setMatchesInfo }: ChildComponentProps) {
 
   return (
     <button
+      className="FormButton"
       onClick={() => {
         fetchMatches();
       }}
