@@ -2,10 +2,13 @@ export interface ChampionProfileProps {
   champName: string;
   level: number;
 }
-export function ChampionProfile({ champName: name, level } : ChampionProfileProps) {
+export function ChampionProfile({
+  champName: name,
+  level,
+}: ChampionProfileProps) {
   return (
-    <td>
-        <div className="Level"> {level} </div>
+    <>
+      <div className="Level"> {level} </div>
       <img
         className="Champion"
         src={
@@ -14,6 +17,6 @@ export function ChampionProfile({ champName: name, level } : ChampionProfileProp
           ".png"
         }
       />
-    </td>
+    </>
   );
 }

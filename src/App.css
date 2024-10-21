@@ -3,40 +3,72 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  color: black;
+  font-size: small;
+
 }
 .td {
   text-align: left;
-  width: 25vw;
+}
+.EmptyItem {
+  width: 4.5vw;
+  position: relative;
+  background-color: black;
+  border-color: magenta;
+
+}
+.Items {
+  width: 40vw;
 }
 .Header {
-  position: absolute;
-  top: 10vh;
-  transform: translateX(-50%);
+  position: relative;
+  top: 0;
   width: 100%;
 }
 .Level {
-  margin-bottom: -24%;
-  margin-left: 54.5%;
   color:black;
-  width: 7%;
+  width: 2vw;
+  height: 4.4vh;
   background-color: blue;
-  position: relative;
+  position: absolute;
+
   
+}
+.Summs {
+  display: grid;
+
+}
+.Sum {
+  width: 3vw;
+  height: 6.5vh;
+}
+.Score {
+  width: 30vw;
+  font-size: small;
+}
+.Victory {
+  color:limegreen;
+}
+.Defeat {
+  color:red;
 }
 
 .SearchBar {
   overflow: hidden;
-  padding-left: 8%;
-  padding-right: 8%;
-  padding: 1rem;
-  height: 6%;
-  width: 60%;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding: 1vw 1vh;
+  height: 6vh;
+  width: 50vw;
   align-items: center;
   justify-content:center;
   background-color: #bbb;
   border-radius: 40%;
   display: flex;                                                                                            
   
+}
+.ChampSumms {
+  display: flex;
 }
 .Label {
   text-align: left;
@@ -66,13 +98,15 @@
 
 }
 .Champion {
-  width: 25%;
-  height: 25%;
-  margin-bottom: 15%;
+  width: 8vw;
+  height: 13vh;
 }
 .Item {
-  width: 15%;
-  height: 15%;
+  width: 4.5vw;
+
+}
+.Entry {
+  background-color: aqua;
 }
 select {
   background: none;
@@ -99,6 +133,12 @@ button {
   align-items: center;
   width: 25%;
 }
+table {
+  width: 80vw;
+}
+tr {
+  width: 80vw;
+}
 td {
-  width: 40%;
+  width: 10vw;
 }

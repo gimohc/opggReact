@@ -27,7 +27,11 @@ function App() {
           <input
             onChange={(e) => {
               const fullName = e.target.value.split("#");
-              setInputData({ ...inputData, playerName: fullName[0], playerTag: fullName[1] });
+              setInputData({
+                ...inputData,
+                playerName: fullName[0],
+                playerTag: fullName[1],
+              });
             }}
             placeholder="Name#Tag"
           />
