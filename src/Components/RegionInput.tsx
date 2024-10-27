@@ -8,8 +8,8 @@ export function RegionInput(
 ) {
   return (
     <>
-      <label className="Label">Region</label>
-      <select defaultValue={undefined} className="Select" onChange={props.onChange} name="region">
+      <label className="label">Region</label>
+      <select defaultValue={undefined} className="select" onChange={props.onChange} name="region">
         <option value="americas"> NA </option>
         <option value="americas"> BR </option>
         <option value="americas"> LAN </option>

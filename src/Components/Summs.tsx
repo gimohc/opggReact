@@ -4,9 +4,9 @@ interface SummsProps {
 }
 export function Summs({ summ0, summ1 }: SummsProps) {
   return (
-    <div className="Summs">
+    <div className="stack">
       <img
-        className="Sum"
+        className="summonerSpellIcon"
         src={
           "https://ddragon.leagueoflegends.com/cdn/14.20.1/img/spell/" +
           summ0 +
@@ -14,7 +14,7 @@ export function Summs({ summ0, summ1 }: SummsProps) {
         }
       />
       <img
-        className="Sum"
+        className="summonerSpellIcon"
         src={
           "https://ddragon.leagueoflegends.com/cdn/14.20.1/img/spell/" +
           summ1 +

@@ -2,7 +2,12 @@ import "../App.css";
 import { ChampionProfile } from "./ChampionProfile";
 import { ItemsMapping } from "./ItemsMapping";
 import { Summs } from "./Summs";
+import TeamComponent from "./TeamComponent";
 
+export interface Player {
+  playerName: string;
+  championName: string;
+}
 export interface MatchInfo {
   win: boolean;
   duration: number;
@@ -12,6 +17,8 @@ export interface MatchInfo {
   level: number;
   score: string;
   items: number[];
+  team1: Player[];
+  team2: Player[];
 }
 export interface InputData {
   playerRegion?: string;
@@ -21,39 +28,51 @@ export interface InputData {
 export function Match(matchInfo: MatchInfo) {
   const score = matchInfo.score.split("/");
   let kda;
+  const matchOutput = matchInfo.win ? "victory" : "defeat";
   if (Number(score[1]) == 0) kda = Number(score[0]) + Number(score[2]);
   else kda = (Number(score[0]) + Number(score[2])) / Number(score[1]);
 
   return (
-    <tr className="Entry">
-      <td className="ChampSumms">
-        <ChampionProfile
-          champName={matchInfo.championName}
-          level={matchInfo.level}
-        />
-        <Summs
-          summ0={matchInfo.summonerSpells[0]}
-          summ1={matchInfo.summonerSpells[1]}
-        />
-      </td>
-      <td>
-        <div className="InputGroup">
-          <div className={matchInfo.win ? "Victory" : "Defeat"}>
-            {matchInfo.win ? "Victory" : "Defeat"}
-          </div>
+    <tr className="linear entry">
+      <td className="stack outputDuration">
+        <div className={matchOutput}>{matchOutput}</div>
+        <div>
           {((matchInfo.duration / 60) | 0) +
-            " mins, " +
+            "m " +
             (matchInfo.duration % 60) +
-            "secs"}
+            "s"}
         </div>
       </td>
-      <ItemsMapping items={matchInfo.items} />
-      <td className="Score">
+      <td className="stack bigger">
+        <div className="linear">
+          <ChampionProfile
+            champName={matchInfo.championName}
+            level={matchInfo.level}
+          />
+
+          <Summs
+            summ0={matchInfo.summonerSpells[0]}
+            summ1={matchInfo.summonerSpells[1]}
+          />
+          <div className="stack">
+            <div className="score"> {matchInfo.score} </div>
+            <div className="score"> {"KDA: " + kda.toPrecision(2)} </div>
+          </div>
+        </div>
+
+        <ItemsMapping items={matchInfo.items} />
+      </td>
+      <td className="linear">
+        <TeamComponent players={matchInfo.team1} />
+        <TeamComponent players={matchInfo.team2} />
+      </td>
+
+      {/*<td className="score">
         {matchInfo.championName + " " + matchInfo.score}
-        <div className={"InputGroup " + (kda >= 1 ? "Victory" : "Defeat")}>
+        <div className={"inputGroup " + (kda >= 1 ? "victory" : "defeat")}>
           {"KDA= " + kda.toPrecision(2)}
         </div>
-      </td>
+      </td>*/}
     </tr>
   );
 }
