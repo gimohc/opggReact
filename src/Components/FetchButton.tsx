@@ -5,18 +5,20 @@ import { InputData, MatchInfo } from "./Match";
 
 interface ChildComponentProps {
   setMatchesInfo: React.Dispatch<React.SetStateAction<MatchInfo[] | null>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function FetchButton({ setMatchesInfo }: ChildComponentProps) {
+export function FetchButton({ setMatchesInfo, setLoading }: ChildComponentProps) {
   const inputData = useContext<InputData | null>(InputContext);
 
   const fetchMatches = async () => {
     if (inputData?.playerRegion == undefined) window.alert("Invalid Region");
     else {
       try {
+        setLoading(true);
         const response = await axios.post(
-          //"https://opgg-production.up.railway.app/api/performAction",
-          "http://localhost:8080/api/performAction",
+          "https://opgg-production.up.railway.app/api/performAction",
+          //"http://localhost:8080/api/performAction",
           {
             actionType: "getMatchHistory",
             inputData: inputData,
@@ -26,13 +28,15 @@ export function FetchButton({ setMatchesInfo }: ChildComponentProps) {
       } catch (error) {
         console.error("Error fetching matches:", error);
       }
+      setLoading(false);
     }
   };
 
   return (
     <button
       className="formButton"
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault();
         fetchMatches();
       }}
     >

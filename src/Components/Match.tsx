@@ -25,6 +25,15 @@ export interface InputData {
   playerName?: string;
   playerTag?: string;
 }
+// eslint-disable-next-line react-refresh/only-export-components
+export function getSrcFromChampionName(championName: string): string {
+  return (
+    "https://ddragon.leagueoflegends.com/cdn/14.20.1/img/champion/" +
+    championName +
+    ".png"
+  );
+}
+
 export function Match(matchInfo: MatchInfo) {
   const score = matchInfo.score.split("/");
   let kda;
@@ -33,9 +42,10 @@ export function Match(matchInfo: MatchInfo) {
   else kda = (Number(score[0]) + Number(score[2])) / Number(score[1]);
 
   return (
-    <tr className="linear entry">
+    <tr className={"linear entry " + matchOutput + "Entry"}>
+      <td className={matchOutput}></td>
       <td className="stack outputDuration">
-        <div className={matchOutput}>{matchOutput}</div>
+        <div className={matchOutput + "Text"}>{matchOutput}</div>
         <div>
           {((matchInfo.duration / 60) | 0) +
             "m " +
@@ -67,12 +77,7 @@ export function Match(matchInfo: MatchInfo) {
         <TeamComponent players={matchInfo.team2} />
       </td>
 
-      {/*<td className="score">
-        {matchInfo.championName + " " + matchInfo.score}
-        <div className={"inputGroup " + (kda >= 1 ? "victory" : "defeat")}>
-          {"KDA= " + kda.toPrecision(2)}
-        </div>
-      </td>*/}
+      <td className={matchOutput} />
     </tr>
   );
 }

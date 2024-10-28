@@ -1,6 +1,13 @@
 interface ItemsInfo {
   items: number[];
 }
+ function getSrcFromItemId(itemId: number): string {
+  return (
+    "https://ddragon.leagueoflegends.com/cdn/14.20.1/img/item/" +
+    itemId +
+    ".png"
+  );
+}
 export function ItemsMapping({ items }: ItemsInfo) {
   return (
     <td className="linear itemsList">
@@ -13,16 +20,7 @@ export function ItemsMapping({ items }: ItemsInfo) {
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKVCIi2W4mVSDTGzkpeQJ5gMl86tEFZUk6Wg&s"
             />
           );
-        return (
-          <img
-            className="item"
-            src={
-              "https://ddragon.leagueoflegends.com/cdn/14.20.1/img/item/" +
-              itemId +
-              ".png"
-            }
-          />
-        );
+        return <img className="item" src={getSrcFromItemId(itemId)} />;
       })}
     </td>
   );

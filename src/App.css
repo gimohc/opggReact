@@ -5,6 +5,8 @@
   text-align: center;
   color: black;
   font-size: 5pt;
+  zoom:300%;
+  color:#939393
 
 }
 .label {
@@ -14,6 +16,7 @@
   font-size: 5pt;
 }
 .header {
+  zoom:70%;
   position: absolute; 
   top: 1vh;
   left: 50%;
@@ -37,6 +40,8 @@
   border-bottom-left-radius: 30px;
 }
 .formButton {
+  outline:none;
+  border:none;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -73,8 +78,6 @@ input {
   font-size: 6pt;
   padding-left: 5px;
 }
-
-
 .stack {
   display: grid;
 }
@@ -82,7 +85,7 @@ input {
   display: flex;
 }
 .matchPlayerName {
-  font-size: 1pt;
+  font-size: 3.5pt;
 }
 .mainChampionIcon {
   border-radius: 15px;
@@ -101,13 +104,19 @@ input {
   margin-left: 15px;
 }
 .teamList {
-
+  width: 40px;
+  margin-top: -1px;
+  margin-right: 2px;
 }
 .level {
+  display: flex;
+  font-size: 4pt;
+  color:white;
   width: 7px;
   height: 7px;
-  align-content: center;
-  background-color: aquamarine;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(43, 48, 47);
   border-radius: 15px;
   margin-right: -18px;
   margin-left: 25px;
@@ -115,16 +124,16 @@ input {
   z-index: 1000;
 }
 .summonerSpellIcon {
-  width: 10px;
+  width: 11px;
 }
 .entry {
   width: 250px;
   height: 35px;
   background-color: #808080;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
 }
 .outputDuration {
-  font-size: 3pt;
+  font-size: 5pt;
   margin-right: 10px;
 }
 .noMargin {
@@ -132,21 +141,50 @@ input {
   padding: 0;
 }
 .score {
+  color:white;
   width: 50px;
   align-items: right;
   align-self: right;
   justify-content: right;
   text-align: right;
 }
+.loading {
+  width: 30px;
+  position: relative;
+  top : 50%;
+}
 .bigger {
   width: 150px;
 }
-
-.victory {
-  color:limegreen;
+.selectedPlayer {
+  color:white;
 }
-
+.victoryEntry{
+  background-color: rgb(69, 69, 118);
+}
+.defeatEntry {
+  background-color: rgb(106, 61, 75);
+}
+.victory{ 
+  background-color: rgb(98, 98, 232);
+}
 .defeat {
+  background-color: rgb(255, 31, 91);
+}
+.victoryText {
+  font-size: 7pt;
+  color:rgb(148, 254, 148);
+}
+.defeatText {
+  font-size: 7pt;
   color:red;
 }
-
+input:focus {
+  outline:none;
+}
+select:focus {
+  outline:none;
+}
+.formButton:focus {
+  outline: none;
+}
