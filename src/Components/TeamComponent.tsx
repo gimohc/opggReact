@@ -7,13 +7,13 @@ export default function TeamComponent({ players }: { players: Player[] }) {
 
   return (
     <div className="stack teamList">
-      {players.map((player) => {
+      {players.map((player, i) => {
         let className = "";
         if (player.playerName == input?.playerName)
           className = " selectedPlayer";
 
         return (
-          <div className="linear noMargin">
+          <div key={player.playerName + i} className="linear noMargin"> {/* key should be puuid but it is okay for now */}
             <img
               className="matchChampionsIcon"
               src={getSrcFromChampionName(player.championName)}

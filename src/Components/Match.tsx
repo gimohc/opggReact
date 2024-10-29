@@ -84,7 +84,10 @@ export function Match(matchInfo: MatchInfo) {
 
 export function Matches({ matches }: { matches: MatchInfo[] | null }) {
   if (matches != null)
-    return matches.map((match: MatchInfo) => {
-      return <Match {...match} />;
+    return matches.map((match: MatchInfo, i: number) => {
+      return <Match key={match.duration + i} {...match} />;
+      {
+        /* key should be match id but it is okay for now */
+      }
     });
 }
