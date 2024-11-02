@@ -8,19 +8,12 @@ interface ItemsInfo {
     ".png"
   );
 }
-export function ItemsMapping({ items }: ItemsInfo) {
+export function ItemsMapping( { items }: ItemsInfo) {
   return (
     <div className="linear itemsList">
       {items.map((itemId: number, i : number) => {
         if (itemId === 0)
-          return (
-            <img
-              key={itemId + i}
-              alt="empty"
-              className="item"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKVCIi2W4mVSDTGzkpeQJ5gMl86tEFZUk6Wg&s"
-            />
-          );
+          return <div className="emptyItem"></div>
         return <img key={"Empty" + i} className="item" src={getSrcFromItemId(itemId)} />;
       })}
     </div>

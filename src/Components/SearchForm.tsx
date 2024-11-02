@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { RegionInput } from "./RegionInput";
-import { InputData, MatchInfo } from "./Match";
+import { InputData } from "./Match";
+import { MatchInfoPlayer } from "../App";
 import axios from "axios";
 
 
 interface ChildComponentProps {
-  setMatchesInfo: React.Dispatch<React.SetStateAction<MatchInfo[] | null>>;
+  setMatchesInfo: React.Dispatch<React.SetStateAction<MatchInfoPlayer | null>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export function SearchForm({
@@ -13,22 +14,24 @@ export function SearchForm({
   setLoading,
 }: ChildComponentProps) {
   const [inputData, setInputData] = useState<InputData>({ playerRegion: "NA" });
-
+  let loading;
   const fetchMatches = async () => {
     try {
+      loading=true;
       setLoading(true);
       const response = await axios.post(
-        //"https://opgg-production.up.railway.app/api/performAction",
-        "http://localhost:8080/api/performAction",
+        "https://opgg-production.up.railway.app/api/performAction",
+        //"http://localhost:8080/api/performAction",
         {
           actionType: "getMatchHistory",
           inputData: inputData,
         }
       );
-      if (response !== null) setMatchesInfo(response.data);
+      if (response !== null) setMatchesInfo({playerName: inputData.playerName, matches: response.data});
     } catch (error) {
       console.error("Error fetching matches:", error);
     }
+    loading = false;
     setLoading(false);
   };
   const onSubmit = (event: { preventDefault: () => void; }) => {
@@ -64,7 +67,7 @@ export function SearchForm({
         />
       </div>
 
-      <input type="submit" className="formButton" />
+      <input type="submit" disabled={loading} className="formButton" />
     </form>
   );
 }

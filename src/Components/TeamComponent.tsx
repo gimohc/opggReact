@@ -1,15 +1,17 @@
-import { useContext } from "react";
 import { getSrcFromChampionName, Player } from "./Match";
-import { InputContext } from "../Context/InputContext";
 
-export default function TeamComponent({ players }: { players: Player[] }) {
-  const input = useContext(InputContext);
+interface TeamComponentChildren {
+  searchedPlayer?: string;
+  players : Player[];
+}
+
+export default function TeamComponent({searchedPlayer, players }: TeamComponentChildren) {
 
   return (
     <div className="stack teamList">
       {players.map((player, i) => {
         let className = "";
-        if (player.playerName == input?.playerName)
+        if (player.playerName == searchedPlayer)
           className = " selectedPlayer";
 
         return (

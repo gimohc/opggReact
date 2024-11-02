@@ -66,7 +66,9 @@
   border: 0;
   font-size: 6pt;
 }
-
+#fadeComponent {
+  transition: opacity 0.5s ease-in-out;
+}
 input {
   border-color: #b1b1b1;
   background: none;
@@ -89,6 +91,7 @@ input {
 }
 .mainChampionIcon {
   border-radius: 15px;
+  margin-right: 2px;
   width: 20px;
   height: 20px;
 }
@@ -97,9 +100,11 @@ input {
   height: 7px;
 }
 .item { 
-  height: 10px;
-  width: 10px;
+  height: 12px;
+  width: 12px;
 }
+
+
 .itemsList {
   margin-left: 15px;
 }
@@ -107,6 +112,7 @@ input {
   width: 40px;
   margin-top: -1px;
   margin-right: 2px;
+  padding-top: 1px;
 }
 .level {
   display: flex;
@@ -128,13 +134,18 @@ input {
 }
 .entry {
   width: 250px;
-  height: 35px;
+  height: 37px;
   background-color: #808080;
   margin-bottom: 3px;
 }
 .outputDuration {
   font-size: 5pt;
-  margin-right: 10px;
+  margin-top: 2px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.duration {
+  width:25px;
 }
 .noMargin {
   margin: 0;
@@ -143,10 +154,8 @@ input {
 .score {
   color:white;
   width: 50px;
-  align-items: right;
-  align-self: right;
-  justify-content: right;
-  text-align: right;
+  padding-left: 7px;
+  text-align: center;
 }
 .loading {
   width: 30px;
@@ -160,25 +169,38 @@ input {
   color:white;
 }
 .victoryEntry{
-  background-color: rgb(69, 69, 118);
+  background-color: #28344E;
+
+  .emptyItem {
+    padding: 6px;
+    background-color:#2F436E;
+    border-radius: 2px;
+  }
+  .outputText {
+    font-size: 5pt;
+    color:#5383E8;
+  }
+  .padding {
+    background-color: #4171D6;
+  }
 }
 .defeatEntry {
-  background-color: rgb(106, 61, 75);
+  background-color: #59343B;
+
+  .emptyItem {
+    padding: 6px;
+    background-color: #703C47;
+    border-radius: 2px;
+  }
+  .outputText {
+    font-size: 5pt;
+    color:red;
+  }
+  .padding {
+    background-color: rgb(255, 31, 91);
+  }
 }
-.victory{ 
-  background-color: rgb(98, 98, 232);
-}
-.defeat {
-  background-color: rgb(255, 31, 91);
-}
-.victoryText {
-  font-size: 7pt;
-  color:rgb(148, 254, 148);
-}
-.defeatText {
-  font-size: 7pt;
-  color:red;
-}
+
 input:focus {
   outline:none;
 }
@@ -187,4 +209,7 @@ select:focus {
 }
 .formButton:focus {
   outline: none;
+}
+.formButton:disabled {
+  color:grey;
 }

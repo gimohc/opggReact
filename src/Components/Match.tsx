@@ -1,8 +1,10 @@
 import "../App.css";
+import React, { useState, useEffect } from "react";
 import { ChampionProfile } from "./ChampionProfile";
 import { ItemsMapping } from "./ItemsMapping";
 import { Summs } from "./Summs";
 import TeamComponent from "./TeamComponent";
+import { MatchInfoPlayer } from "../App.tsx";
 
 export interface Player {
   playerName: string;
@@ -10,8 +12,8 @@ export interface Player {
 }
 export interface MatchInfo {
   win: boolean;
+  playerName?: string;
   duration: number;
-  playerName: string;
   summonerSpells: string[];
   championName: string;
   level: number;
@@ -34,7 +36,50 @@ export function getSrcFromChampionName(championName: string): string {
   );
 }
 
-export function Match(matchInfo: MatchInfo) {
+export function Match({ matchInfo }: { matchInfo: MatchInfo }) {
+  const [opacity, setOpacity] = useState<number>(0);
+
+  /*const handleScroll = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    const rect = document
+      .getElementById("fadeComponent")
+      ?.getBoundingClientRect();
+    if (rect != undefined) {
+      const fadeInPoint = window.innerHeight - rect.top; // window.innerHeight / 2;
+
+      if (scrollTop <= fadeInPoint) setOpacity(scrollTop / fadeInPoint);
+      else setOpacity(fadeInPoint / window.innerHeight);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+*/
+  useEffect(() => {
+    const handleScroll = () => {
+      const component = document.getElementById("fadeComponent");
+      const rect = component?.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      if (rect != undefined) {
+        // Calculate the position of the component
+        const fadeInPoint = windowHeight - rect.top;
+        const fadeOutPoint = windowHeight + rect.height;
+
+        if (fadeInPoint > 0 && fadeInPoint <= windowHeight) {
+          setOpacity(fadeInPoint / windowHeight);
+        } else if (fadeInPoint > windowHeight && fadeInPoint <= fadeOutPoint) {
+          setOpacity(1 - (fadeInPoint - windowHeight) / windowHeight);
+        } else {
+          setOpacity(0);
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const score = matchInfo.score.split("/");
   let kda;
   const matchOutput = matchInfo.win ? "victory" : "defeat";
@@ -42,11 +87,15 @@ export function Match(matchInfo: MatchInfo) {
   else kda = (Number(score[0]) + Number(score[2])) / Number(score[1]);
 
   return (
-    <tr className={"linear entry " + matchOutput + "Entry"}>
-      <td className={matchOutput}></td>
+    <tr
+      id="fadeComponent"
+      style={{ opacity }}
+      className={"linear entry " + matchOutput + "Entry"}
+    >
+      <td className="padding"></td>
       <td className="stack outputDuration">
-        <div className={matchOutput + "Text"}>{matchOutput}</div>
-        <div>
+        <div className="outputText">{matchOutput.toUpperCase()}</div>
+        <div className="duration">
           {((matchInfo.duration / 60) | 0) +
             "m " +
             (matchInfo.duration % 60) +
@@ -66,26 +115,41 @@ export function Match(matchInfo: MatchInfo) {
           />
           <div className="stack">
             <div className="score"> {matchInfo.score} </div>
-            <div className="score"> {"KDA: " + kda.toPrecision(2)} </div>
+            <div className="score"> {kda.toPrecision(2) + ":1 KDA"} </div>
           </div>
         </div>
 
         <ItemsMapping items={matchInfo.items} />
       </td>
       <td className="linear">
-        <TeamComponent players={matchInfo.team1} />
-        <TeamComponent players={matchInfo.team2} />
+        <TeamComponent
+          searchedPlayer={matchInfo.playerName}
+          players={matchInfo.team1}
+        />
+        <TeamComponent
+          searchedPlayer={matchInfo.playerName}
+          players={matchInfo.team2}
+        />
       </td>
 
-      <td className={matchOutput} />
+      <td className="padding" />
     </tr>
   );
 }
 
-export function Matches({ matches }: { matches: MatchInfo[] | null }) {
-  if (matches != null)
-    return matches.map((match: MatchInfo, i: number) => {
-      return <Match key={match.duration + i} {...match} />;
+export function Matches({
+  playerMatches,
+}: {
+  playerMatches: MatchInfoPlayer | null;
+}) {
+  if (playerMatches != null)
+    return playerMatches.matches.map((match: MatchInfo, i: number) => {
+      return (
+        <Match
+          key={match.duration + i}
+          matchInfo={{ ...match, playerName: playerMatches.playerName }}
+        />
+      );
       {
         /* key should be match id but it is okay for now */
       }
