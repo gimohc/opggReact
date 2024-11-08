@@ -1,5 +1,8 @@
 #root {
-  max-width: 1280px;
+  --background: rgba(23, 27, 63, 0.905);
+  background-color: rgb(0, 1, 15);
+  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -28,7 +31,7 @@
   display: flex;
 }
 .inputGroup {
-  background-color: #444444;
+  background-color: var(--background);
   height: 30px;
   display: grid;
   align-items: flex-end;
@@ -39,6 +42,18 @@
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 }
+.nameGroup::before 
+{
+  content: "";
+  display: flex;
+  position:absolute;
+
+  top:40%;
+
+  width: 0.4px;
+  height: 7px;
+  background: black;
+}
 .formButton {
   outline:none;
   border:none;
@@ -46,7 +61,7 @@
   align-items: center;
   display: flex;
   text-align: left;
-  background: #444444;
+  background: var(--background);
   width: 50px;
   height: 30px;
   color:rgb(77, 109, 223);
@@ -70,11 +85,10 @@
   transition: opacity 0.5s ease-in-out;
 }
 input {
-  border-color: #b1b1b1;
   background: none;
-  border-width: 0px 0px 0px 1px;
+  border-width: 0px;
   width: 235px;
-  background-color: #444444;
+  background-color: var(--background);
   height: 100%;
   color:white;
   font-size: 6pt;
@@ -131,6 +145,14 @@ input {
 }
 .summonerSpellIcon {
   width: 11px;
+}
+table {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+}
+.matches::after {
+  margin-bottom: 70px;
 }
 .entry {
   width: 250px;

@@ -21,8 +21,8 @@ export default function TeamComponent({searchedPlayer, players }: TeamComponentC
               src={getSrcFromChampionName(player.championName)}
             />
             <span className={"matchPlayerName" + className}>
-              {player.playerName.length > 10
-                ? player.playerName.slice(0, 10) + ".."
+              {player.playerName.length > 9
+                ? player.playerName.slice(0, 9) + ".."
                 : player.playerName}
             </span>
           </div>

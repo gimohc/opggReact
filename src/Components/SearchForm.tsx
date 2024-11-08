@@ -4,7 +4,6 @@ import { InputData } from "./Match";
 import { MatchInfoPlayer } from "../App";
 import axios from "axios";
 
-
 interface ChildComponentProps {
   setMatchesInfo: React.Dispatch<React.SetStateAction<MatchInfoPlayer | null>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,7 +16,7 @@ export function SearchForm({
   let loading;
   const fetchMatches = async () => {
     try {
-      loading=true;
+      loading = true;
       setLoading(true);
       const response = await axios.post(
         "https://opgg-production.up.railway.app/api/performAction",
@@ -27,19 +26,22 @@ export function SearchForm({
           inputData: inputData,
         }
       );
-      if (response !== null) setMatchesInfo({playerName: inputData.playerName, matches: response.data});
+      if (response !== null)
+        setMatchesInfo({
+          playerName: inputData.playerName,
+          matches: response.data,
+        });
     } catch (error) {
       console.error("Error fetching matches:", error);
     }
     loading = false;
     setLoading(false);
   };
-  const onSubmit = (event: { preventDefault: () => void; }) => {
+  const onSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     fetchMatches();
-} 
+  };
 
-  
   return (
     <form onSubmit={onSubmit} className="searchBar header">
       <div className="inputGroup selectGroup">
@@ -66,7 +68,6 @@ export function SearchForm({
           placeholder="Name#Tag"
         />
       </div>
-
       <input type="submit" disabled={loading} className="formButton" />
     </form>
   );

@@ -20,9 +20,8 @@ function App() {
         <img className="loading" src="https://i.gifer.com/VAyR.gif" />
       )}
       <table>
-        <tbody>
+
           <Matches playerMatches={matches} />
-        </tbody>
       </table>
     </>
   );

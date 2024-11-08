@@ -1,5 +1,5 @@
 import "../App.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ChampionProfile } from "./ChampionProfile";
 import { ItemsMapping } from "./ItemsMapping";
 import { Summs } from "./Summs";
@@ -27,6 +27,10 @@ export interface InputData {
   playerName?: string;
   playerTag?: string;
 }
+interface MatchComponentChildren {
+  id: string;
+  matchInfo: MatchInfo;
+}
 // eslint-disable-next-line react-refresh/only-export-components
 export function getSrcFromChampionName(championName: string): string {
   return (
@@ -36,49 +40,32 @@ export function getSrcFromChampionName(championName: string): string {
   );
 }
 
-export function Match({ matchInfo }: { matchInfo: MatchInfo }) {
-  const [opacity, setOpacity] = useState<number>(0);
+export function Match({ matchInfo, id }: MatchComponentChildren) {
+  const [opacity, setOpacity] = useState<number>(0.2);
 
-  /*const handleScroll = () => {
+  const handleScroll = () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const pageHeight = document.documentElement.scrollHeight;
+    const windowHeight = window.innerHeight;
 
-    const rect = document
-      .getElementById("fadeComponent")
-      ?.getBoundingClientRect();
+    const rect = document.getElementById(id)?.getBoundingClientRect();
     if (rect != undefined) {
-      const fadeInPoint = window.innerHeight - rect.top; // window.innerHeight / 2;
-
-      if (scrollTop <= fadeInPoint) setOpacity(scrollTop / fadeInPoint);
-      else setOpacity(fadeInPoint / window.innerHeight);
+      if (rect.top < windowHeight / 2 || scrollTop > pageHeight - windowHeight)
+        setOpacity(1);
+      else if (scrollTop > pageHeight / 6)
+        setOpacity(
+          (((windowHeight - rect.top) / windowHeight) * scrollTop) /
+            windowHeight * 1.5
+        );
+      else setOpacity((windowHeight - rect.top) / windowHeight);
     }
   };
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-*/
-  useEffect(() => {
-    const handleScroll = () => {
-      const component = document.getElementById("fadeComponent");
-      const rect = component?.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      if (rect != undefined) {
-        // Calculate the position of the component
-        const fadeInPoint = windowHeight - rect.top;
-        const fadeOutPoint = windowHeight + rect.height;
 
-        if (fadeInPoint > 0 && fadeInPoint <= windowHeight) {
-          setOpacity(fadeInPoint / windowHeight);
-        } else if (fadeInPoint > windowHeight && fadeInPoint <= fadeOutPoint) {
-          setOpacity(1 - (fadeInPoint - windowHeight) / windowHeight);
-        } else {
-          setOpacity(0);
-        }
-      }
-    };
+  useEffect(() => {
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  });
 
   const score = matchInfo.score.split("/");
   let kda;
@@ -88,7 +75,7 @@ export function Match({ matchInfo }: { matchInfo: MatchInfo }) {
 
   return (
     <tr
-      id="fadeComponent"
+      id={id}
       style={{ opacity }}
       className={"linear entry " + matchOutput + "Entry"}
     >
@@ -143,15 +130,21 @@ export function Matches({
   playerMatches: MatchInfoPlayer | null;
 }) {
   if (playerMatches != null)
-    return playerMatches.matches.map((match: MatchInfo, i: number) => {
-      return (
-        <Match
-          key={match.duration + i}
-          matchInfo={{ ...match, playerName: playerMatches.playerName }}
-        />
-      );
-      {
-        /* key should be match id but it is okay for now */
-      }
-    });
+    return (
+      <tbody className="matches">
+        {playerMatches.matches.map((match: MatchInfo, i: number) => {
+          return (
+            <Match
+              id={"fadeComponent " + i}
+              key={match.duration + i}
+              matchInfo={{ ...match, playerName: playerMatches.playerName }}
+            />
+          );
+        })}
+      </tbody>
+    );
+
+  {
+    /* key should be match id but it is okay for now */
+  }
 }

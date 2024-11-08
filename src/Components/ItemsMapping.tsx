@@ -8,13 +8,14 @@ interface ItemsInfo {
     ".png"
   );
 }
+let item = 0;
 export function ItemsMapping( { items }: ItemsInfo) {
   return (
     <div className="linear itemsList">
-      {items.map((itemId: number, i : number) => {
+      {items.map((itemId: number) => {
         if (itemId === 0)
-          return <div className="emptyItem"></div>
-        return <img key={"Empty" + i} className="item" src={getSrcFromItemId(itemId)} />;
+          return <div key={"Empty" + item++} className="emptyItem"></div>
+        return <img key={"Item" + item++}  className="item" src={getSrcFromItemId(itemId)} />;
       })}
     </div>
   );
